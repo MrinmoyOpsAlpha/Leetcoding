@@ -1,5 +1,22 @@
 class Solution {
 public:
+    //using recursion
+    int editRecursion(string s,string t,int i,int j){
+        if(i==0) return j;
+        if(j==0) return i;
+        
+        if(s[i-1]==t[j-1]){
+            return editRecursion(s,t,i-1,j-1);
+        }
+        else{
+            int insertChar = editRecursion(s,t,i,j-1);
+            int deleteChar = editRecursion(s,t,i-1,j);
+            int replaceChar = editRecursion(s,t,i-1,j-1);
+            return 1 + min({insertChar,deleteChar,replaceChar});
+        }
+    }
+    
+    //using bottom-up dp
     int edit_distance(string s,string t,int m,int n){
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
          for (int i = 1; i <= m; i++) {
