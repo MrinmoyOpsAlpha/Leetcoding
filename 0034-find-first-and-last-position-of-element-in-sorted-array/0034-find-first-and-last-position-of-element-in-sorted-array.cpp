@@ -12,7 +12,8 @@ public:
     
     vector<int> searchRange(vector<int>& nums, int target) {
         int Tleft = bsearch(target, nums);
-        if (Tleft == nums.size() || nums[Tleft] != target) return {-1, -1};
-        return {Tleft, bsearch(target+1, nums, Tleft) - 1};
+        vector<int> ans(2,-1);
+        if (Tleft == nums.size() || nums[Tleft] != target) return ans;
+        return {Tleft, bsearch(target+1, nums, Tleft) -1};
     }
 };
