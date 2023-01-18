@@ -1,7 +1,7 @@
 class Solution {
 public:
     int maxSubarraySumCircular(vector<int>& nums) {
-        int total =0, maxSum = nums[0],currMax=0,minSum = nums[0],currMin =0;
+        int total =0, maxSum = INT_MIN,currMax=0,minSum = INT_MAX,currMin =0;
         for(auto it:nums){
             currMax = max(currMax + it , it);
             maxSum = max(maxSum,currMax);
