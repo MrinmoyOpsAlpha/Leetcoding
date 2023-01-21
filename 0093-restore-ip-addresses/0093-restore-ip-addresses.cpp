@@ -22,12 +22,10 @@ public:
     }
     
     bool isValidIP(string s,int start,int end){
-        string temp = s.substr(start, end-start+1);
-        int ip = stoll(temp);
-        
+        string temp = s.substr(start,end-start+1);
+        int tempIP = stoll(temp);
         if(s[start] == '0' && start != end) return false;
-        else if(ip >= 0 && ip <= 255) return true;
-        
+        else if(tempIP >=0 && tempIP <= 255) return true;
         return false;
     }
     vector<string> restoreIpAddresses(string s) {
