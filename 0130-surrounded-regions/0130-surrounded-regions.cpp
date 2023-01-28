@@ -9,6 +9,27 @@ public:
         dfs(board,i,j-1,rows,cols);
     }
     
+    
+    void bfs(vector<vector<char>>& board,int i,int j,int rows,int cols){
+        if(board[i][j] != 'O') return;
+        else board[i][j] = 'D';
+        
+        queue<pair<int,int>> q;
+        q.push({i,j});
+        
+        while(!q.empty()){
+            auto it = q.front();
+            int x = it.first;
+            int y = it.second;
+            q.pop();
+            
+            if(x+1<rows && board[x+1][y]=='O') q.push({x+1,y}) , board[x+1][y] = 'D';
+            if(x-1>0 && board[x-1][y]=='O') q.push({x-1,y}) , board[x-1][y] = 'D';
+            if(y+1<cols && board[x][y+1]=='O') q.push({x,y+1}) , board[x][y+1] = 'D';
+            if(y-1>0 && board[x][y-1]=='O') q.push({x,y-1}) , board[x][y-1] = 'D';
+        }
+    }
+    
     void solve(vector<vector<char>>& board) {
         if(!board.size()) return;
         
@@ -19,12 +40,12 @@ public:
         //first the rows and then the columns
         
         for(int i=0;i<rows;i++){
-            dfs(board,i,0,rows,cols);
+            bfs(board,i,0,rows,cols);
             if(cols>1) dfs(board,i,cols-1,rows,cols);
         }
         
         for(int i=0;i<cols;i++){
-            dfs(board,0,i,rows,cols);
+            bfs(board,0,i,rows,cols);
             if(rows>1) dfs(board,rows-1,i,rows,cols);
         }
         
