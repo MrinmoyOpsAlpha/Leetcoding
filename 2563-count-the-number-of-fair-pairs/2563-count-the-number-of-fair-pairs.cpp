@@ -2,11 +2,14 @@ class Solution {
 public:
     long long countLess(vector<int>& nums, int val) {
         long long res = 0;
-        for (int i = 0, j = nums.size() - 1; i < j; ++i) {
+        int i = 0, j = nums.size() - 1;
+        while (i < j) {
             while(i < j && nums[i] + nums[j] >= val)
                 --j;
             res += j - i;
-        }        
+            i++;
+        } 
+      
         return res;
     }
     long long countFairPairs(vector<int>& nums, int lower, int upper) {
