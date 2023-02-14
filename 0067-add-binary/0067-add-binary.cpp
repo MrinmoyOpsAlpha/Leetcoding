@@ -1,7 +1,6 @@
 class Solution {
 public:
     string addBinary(string a, string b) {
-        int n = max(a.size(),b.size());
         string s;
         
         int i=a.size()-1,j=b.size()-1;
