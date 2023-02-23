@@ -10,18 +10,20 @@ public:
         priority_queue<int> pq;
         int i=0;
         
-        while(k--){
-            while(i<arr.size() && w >= arr[i].first){
-                pq.push(arr[i].second);
-                i++;
-            } 
-            
-            if(pq.empty()) break;
-            
+        while(i<arr.size() && k){
+            if(w >= arr[i].first ) pq.push(arr[i].second) , i++;
+            else{
+                if(pq.empty()) return w; 
+                w = w + pq.top();
+                pq.pop();
+                k--;
+            }
+        }
+        
+        while(k-- && !pq.empty()){
             w = w + pq.top();
             pq.pop();
         }
-        
         return w;
     }
 };
