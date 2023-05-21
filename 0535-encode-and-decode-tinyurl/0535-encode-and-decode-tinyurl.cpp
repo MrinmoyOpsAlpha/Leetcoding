@@ -3,16 +3,10 @@ private:
     unordered_map<string,string> long_to_short;
     unordered_map<string,string> short_to_long;
     
+    int hash = 0;
     uint64_t hash_function(const string& str){
-        uint64_t hash = 0x811c9dc5;
-        uint64_t prime = 0x1000193;
-        
-        for(int i = 0; i < str.size(); ++i) {
-            uint8_t value = str[i];
-            hash = hash ^ value;
-            hash *= prime;
-        }
-
+        hash = 100 * hash;
+        hash++;
         return hash;
     } 
     
