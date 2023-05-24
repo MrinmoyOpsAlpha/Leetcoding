@@ -7,10 +7,9 @@ public:
         int j = 0;
         while(j + k <= s.size()){
             all_substrings.insert(s.substr(j,k));
+            if(all_substrings.size() == total) return true;
             j++;
         }
-        
-        if(all_substrings.size() == total) return true;
-        else return false;
+        return false;
     }
 };
