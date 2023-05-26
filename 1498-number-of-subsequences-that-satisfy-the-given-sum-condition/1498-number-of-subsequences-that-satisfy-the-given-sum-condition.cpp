@@ -7,7 +7,7 @@ public:
         
         vector<int> pow(n,1);
         for(int i=1;i<n;i++){
-            pow[i] = pow[i-1] * 2 % mod;
+            pow[i] =( pow[i-1] * 2) % mod;
         }
         
         while(i<=j){
