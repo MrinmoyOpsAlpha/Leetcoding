@@ -2,12 +2,10 @@ class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
         sort(nums.begin(), nums.end());
-        int n = nums.size(), ptr = 0;
-        vector<int> res(n);
+        int n = nums.size();
         
-        for(int i=0;i<n;i=i+2) res[i] = nums[ptr++];
-        for(int j=1;j<n;j=j+2) res[j] = nums[ptr++];
+        for(int i=0;i<n-1;i+=2) swap(nums[i],nums[i+1]);
         
-        return res;
+        return nums;
     }
 };
