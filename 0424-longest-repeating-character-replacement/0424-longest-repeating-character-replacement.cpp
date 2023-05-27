@@ -1,25 +1,19 @@
 class Solution {
 public:
     int characterReplacement(string s, int k) {
-        
         unordered_map<char,int> mp;
-        
-        int i=0,j=0, res = -1, maxRepeatingElements = 0;
+        int i = 0, j = 0, res = 0, maxF = 0;
         
         while(j<s.size()){
-            
             mp[s[j]]++;
-            maxRepeatingElements = max(maxRepeatingElements , mp[s[j]]);
+            maxF = max(maxF,mp[s[j]]);
             
-            int windowLength = j - i + 1;
-            
-            if(windowLength - maxRepeatingElements > k){
+            if((j-i+1) - maxF > k){
                 mp[s[i]]--;
                 i++;
             }
             
-            windowLength = j-i+1;
-            res = max(res,windowLength);
+            res = max(res,j-i+1);
             j++;
         }
         return res;
