@@ -16,13 +16,13 @@ public:
         while(st.size() != n-k) st.pop();
         
         string res = "";
-      while(!st.empty())
-      {
-        res += st.top();
-        st.pop();
-      }
-      reverse(res.begin() , res.end());
-        
+        while(!st.empty())
+        {
+            res += st.top();
+            st.pop();
+        }
+        reverse(res.begin() , res.end());
+
         while(res[0]=='0') res.erase(0,1);
         
         return (res=="") ? "0":res;
