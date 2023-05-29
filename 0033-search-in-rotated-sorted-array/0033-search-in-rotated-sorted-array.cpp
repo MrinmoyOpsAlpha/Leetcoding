@@ -2,9 +2,8 @@ class Solution {
 public:
     int search(vector<int>& nums, int target) {
         int low = 0, high = nums.size()-1;
-        
         while(low<=high){
-            int mid = (low+high) >> 1 ;
+            int mid = (low + high) >> 1;
             
             if(nums[mid] == target) return mid;
             
@@ -16,13 +15,12 @@ public:
                     low = mid + 1;
                 }
             }
-            
             else{
                 if(nums[mid] <= target && target <= nums[high]){
                     low = mid + 1;
                 }
                 else{
-                    high = high - 1;
+                    high = mid - 1;
                 }
             }
         }
