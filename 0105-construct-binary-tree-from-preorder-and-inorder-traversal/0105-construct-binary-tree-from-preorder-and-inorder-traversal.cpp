@@ -11,25 +11,24 @@
  */
 class Solution {
 private:
-    TreeNode* build(vector<int>& preorder, vector<int>& inorder, int& index, int start, int end) {
-        if (start > end) return nullptr;
-
+    TreeNode* build(vector<int>& preorder, vector<int>& inorder, int &index, int start, int end){
+        if(start > end) return NULL;
+        
         TreeNode* root = new TreeNode(preorder[index]);
-
+        
         int splitIndex = start;
-        while (inorder[splitIndex] != preorder[index]) {
+        while(preorder[index] != inorder[splitIndex]){
             splitIndex++;
         }
         index++;
-
+        
         root->left = build(preorder, inorder, index, start, splitIndex - 1);
         root->right = build(preorder, inorder, index, splitIndex + 1, end);
         return root;
     }
-
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         int index = 0;
-        return build(preorder, inorder, index, 0, inorder.size() - 1);
+        return build(preorder,inorder,index,0,inorder.size()-1);
     }
 };
