@@ -6,7 +6,7 @@ public:
         for(int i = 0;i<points.size();i++){
             int x = points[i][0];
             int y = points[i][1];
-            int dist = x * x + y * y;
+            int dist = (x * x + y * y);
             pq.push({dist,points[i]});
         }
         
