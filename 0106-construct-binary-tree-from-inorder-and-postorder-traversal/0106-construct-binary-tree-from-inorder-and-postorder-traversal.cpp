@@ -17,13 +17,14 @@ private:
         TreeNode* root = new TreeNode(postorder[index]);
         
         int splitIndex = start;
-        while(splitIndex <= end && postorder[index] != inorder[splitIndex]){
+        while(postorder[index] != inorder[splitIndex]){
             splitIndex++;
         }
         index--;
         
         root->right = build(inorder, postorder, index, splitIndex + 1, end);
         root->left = build(inorder, postorder, index, start, splitIndex - 1);
+
         return root;
     }
 public:
