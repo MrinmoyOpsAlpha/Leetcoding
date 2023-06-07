@@ -11,7 +11,7 @@ private:
             num = num + (s[i] - '0');
             
             if(last == -1 || last == num + 1){
-                flag = flag | solve(s, num , i + 1, count + 1);
+                flag = flag || solve(s, num , i + 1, count + 1);
             }
             else if(last != -1 &&  num >= last) break;
         }
