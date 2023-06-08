@@ -1,9 +1,18 @@
 class Solution {
-public:
-    
-    /// main logic or trick for this problem : bahar se andar ki taraf jao
-    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
+    void dfs(vector<vector<int>>& heights, vector<vector<bool>>& vis, int i, int j){
+        int m = heights.size();
+        int n = heights[0].size();
         
+        vis[i][j] = true;
+        
+        if(i-1>=0 && vis[i-1][j] != true && heights[i-1][j] >= heights[i][j]) dfs(heights,vis,i-1,j);
+        if(i+1<m && vis[i+1][j] != true && heights[i+1][j] >= heights[i][j]) dfs(heights,vis,i+1,j);
+        if (j-1 >= 0 && vis[i][j-1] != true && heights[i][j-1] >= heights[i][j]) dfs(heights, vis, i, j-1);
+        if(j+1<n && vis[i][j+1] != true && heights[i][j+1] >= heights[i][j]) dfs(heights,vis,i,j+1);
+        
+    }
+public:
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& heights) {
         vector<vector<int>>ans;
         int m = heights.size();
         int n = heights[0].size();
@@ -33,26 +42,5 @@ public:
             }
         }
         return ans;
-    }
-    
-    void dfs(vector<vector<int>>& h, vector<vector<bool>>& vis, int i, int j) {
-        
-        int m = h.size();
-        int n = h[0].size();
-
-        vis[i][j] = true;
-        //up
-        if (i-1 >= 0 && vis[i-1][j] != true && h[i-1][j] >= h[i][j])
-            dfs(h, vis, i-1, j);
-        //down
-        if (i+1 < m && vis[i+1][j] != true && h[i+1][j] >= h[i][j])
-            dfs(h, vis, i+1, j);
-        //left
-        if (j-1 >= 0 && vis[i][j-1] != true && h[i][j-1] >= h[i][j])
-            dfs(h, vis, i, j-1);
-        //right
-        if (j+1 < n && vis[i][j+1] != true && h[i][j+1] >= h[i][j])
-            dfs(h, vis, i, j+1);
-
     }
 };
