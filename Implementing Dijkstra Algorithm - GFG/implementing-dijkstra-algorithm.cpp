@@ -12,7 +12,7 @@ class Solution
     {
         // Code here
         vector<int> dist(V,INT_MAX);
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq; //dist, node
         
         dist[S]=0;
         pq.push({0,S});
