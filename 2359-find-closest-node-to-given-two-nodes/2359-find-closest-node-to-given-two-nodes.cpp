@@ -1,39 +1,43 @@
 class Solution {
-public:
-int closestMeetingNode(vector<int>& edges, int node1, int node2) {
-        
-        vector<int>dist1(edges.size(),-1);
-        vector<int>dist2(edges.size(),-1);
-        
-        vector<bool>visited(edges.size(),false);
-        dfs(node1,dist1,visited,edges,0);
-        visited.assign(edges.size(),false);
-        dfs(node2,dist2,visited,edges,0);
-        
-        int ans = edges.size();
-        int result = -1;
-         for(int i=0;i<edges.size();i++)
-         {  
-             if(dist1[i]!=-1 && dist2[i]!=-1)
-             {
-                if(max(dist1[i] , dist2[i]) < ans)
-                {
-                    ans = max(dist1[i] , dist2[i]);
-                    result = i;
-                }
-             }
-         }
-        return result;
-       
-    }
+void bfs(vector<int> adj[],int src, vector<int>& dist){
+    queue<int> q;
+    q.push(src);
+    dist[src] = 0;
     
-      void dfs(int node, vector<int>&dist1, vector<bool>&visited,vector<int>& edges, int distance)
-      {          
-           if(node!=-1 && !visited[node] )
-           {  visited[node] = true;
-              dist1[node] = distance;
-             dfs(edges[node], dist1, visited, edges, distance+1);
-           }
-      }
-
+    while(!q.empty()){
+        auto node = q.front();
+        q.pop();
+        
+        for(auto it:adj[node]){
+            if(it != -1 && dist[it] == INT_MAX){
+                q.push(it);
+                dist[it] = 1 + dist[node];
+            }
+        }
+    }
+}
+public:
+    int closestMeetingNode(vector<int>& edges, int node1, int node2) {
+        int n = edges.size();
+        vector<int> adj[n];
+        
+        for (int i = 0; i < n; i++) {
+            adj[i].push_back(edges[i]);
+        }
+        
+        vector<int> A(n,INT_MAX), B(n,INT_MAX);
+        bfs(adj,node1,A);
+        bfs(adj,node2,B);
+        
+        int res =INT_MAX , node = -1;
+        
+        for(int i = 0;i<n;i++){
+            if(A[i]==INT_MAX or B[i]==INT_MAX) continue;
+            if(res > max(A[i],B[i])) {
+                node = i;
+                res = max(A[i],B[i]);
+            }
+        }
+        return node;
+    }
 };
