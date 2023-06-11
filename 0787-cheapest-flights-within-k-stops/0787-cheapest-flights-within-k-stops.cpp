@@ -7,7 +7,7 @@ public:
         }
         
         vector<int> dist(n,INT_MAX);
-        queue<pair<int,pair<int,int>>> q;
+        queue<pair<int,pair<int,int>>> q; // stops, {neighbour node , dist of neighhbour node}
         q.push({0,{src,0}});
         
         while(!q.empty()){
