@@ -7,27 +7,27 @@ public:
         }
         
         vector<int> dist(n,INT_MAX);
-        queue<pair<int,pair<int,int>>> q; // stops, {neighbour node , dist of neighhbour node}
+        queue<pair<int,pair<int,int>>> q; // stops, {neighbour, dist of neighbour}
         q.push({0,{src,0}});
         
         while(!q.empty()){
-            int stop = q.front().first;
-            int node = q.front().second.first;
-            int cost = q.front().second.second;
+            int stops = q.front().first;
+            int node  = q.front().second.first;
+            int cost  = q.front().second.second;
             q.pop();
             
-            if(stop > k) continue;
+            if(stops > k )continue;
             for(auto it:adj[node]){
                 int edW = it.second;
                 int adjNode = it.first;
                 
-                if(edW + cost < dist[adjNode] && stop <= k ){
+                if(edW + cost < dist[adjNode] && stops <= k){
                     dist[adjNode] = edW + cost;
-                    q.push({stop+1,{adjNode,dist[adjNode]}});
+                    q.push({stops + 1, {adjNode, dist[adjNode]}});
                 }
             }
         }
         
-        return (dist[dst] == INT_MAX) ? -1 : dist[dst];
+        return dist[dst] == INT_MAX ? -1 : dist[dst];
     }
 };
