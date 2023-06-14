@@ -6,20 +6,21 @@ public:
             sums[num] += num;
         }
         
-        int take = 0, skip = 0;
+        int rob1 = 0 , rob2 = 0;
         
-        for (auto& p : sums){
-            if(sums.find(p.first - 1) == sums.end()){
-                skip = take;
-                take += p.second;
+        for(auto it:sums){
+            if(sums.find(it.first - 1) == sums.end()){
+                rob1 = rob2;
+                rob2 += it.second;
             }
+            
             else{
-                int temp = max(skip + p.second, take);
-                skip = take;
-                take = temp;
+                int temp = max(it.second + rob1, rob2);
+                rob1 = rob2;
+                rob2 = temp;
             }
         }
         
-        return take;
+        return rob2;
     }
 };
