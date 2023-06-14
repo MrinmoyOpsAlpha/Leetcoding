@@ -6,8 +6,8 @@ public:
         
         for(int i=1;i<n;i++)
             for(int j=0;j<=i;j++){
-                if(nums[i] > nums[j] && dp[j] >= dp[i]){
-                    dp[i] = dp[j] + 1;
+                if(nums[i] > nums[j]){
+                    dp[i] =max(dp[i], dp[j] + 1);
                 }
             }
         
