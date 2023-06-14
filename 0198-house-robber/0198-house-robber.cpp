@@ -1,13 +1,16 @@
 class Solution {
 public:
     int rob(vector<int>& nums) {
-        int oddAns = 0, evenAns = 0;
+        int rob1 = 0, rob2 = 0;
+        
+        // rob1, rob2, nums[i], nums[i+1]...
         
         for(int i=0;i<nums.size();i++){
-            if(i&1) evenAns = max(evenAns + nums[i], oddAns);
-            else oddAns = max(oddAns + nums[i], evenAns);
+            int temp = max(rob1 + nums[i], rob2);
+            rob1 = rob2;
+            rob2 = temp;
         }
         
-        return max(evenAns, oddAns);
+        return rob2;
     }
 };
