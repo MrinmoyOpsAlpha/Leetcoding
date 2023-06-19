@@ -5,17 +5,16 @@ public:
         map<int, int> mp;
         for(auto i: hand) mp[i]++;
         
-         while(mp.size()){
-            int first = mp.begin() -> first;  
-           
-            int target = first + groupSize - 1;
+        while(mp.size()){
+            int curr = mp.begin()->first;
             
-            for(int i = first; i <= target; i++){
+            for(int i=0;i<groupSize;i++){
+                if(mp.find(curr + i) == mp.end()) return false;
                 
-                if(mp.count(i) == 0) return false;  
+                mp[curr + i]--;
                 
-                else if(--mp[i] == 0) mp.erase(i);  
-            }        
+                if(mp[curr + i] == 0) mp.erase(curr + i);
+            }
         }
         
         return true;
