@@ -8,14 +8,14 @@ public:
                 res.push_back(intervals[i]);
             }
             
-            else if(intervals[i][0] > newInterval[1]){
+            else if (intervals[i][0] > newInterval[1]){
                 res.push_back(newInterval);
-                newInterval=intervals[i];
+                newInterval = intervals[i];
             }
             
-            else if(intervals[i][1] >= newInterval[0] || intervals[i][0] <=newInterval[1]){
-                newInterval[0] = min (intervals[i][0] ,newInterval[0] );
-                newInterval[1] = max (intervals[i][1] ,newInterval[1] );
+            else if(intervals[i][0] <= newInterval[1] && intervals[i][1] >= newInterval[0]){
+                newInterval[0] = min(intervals[i][0] , newInterval[0]);
+                newInterval[1] = max(intervals[i][1] , newInterval[1]);
             }
         }
         
@@ -23,3 +23,4 @@ public:
         return res;
     }
 };
+
