@@ -1,6 +1,12 @@
 class Solution {
 public:
     int getSum(int a, int b) {
-        return int(log2((pow(2,a)) * (pow(2,b))));
+        unsigned int carry = 0;
+        while(b != 0) {
+            carry = (a & b);
+            a = a ^ b;
+            b = carry << 1;
+        }
+        return a;
     }
 };
