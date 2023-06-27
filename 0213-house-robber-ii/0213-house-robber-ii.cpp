@@ -1,11 +1,14 @@
 class Solution {
     int maxRobbery(vector<int> temp){
-        int evenAns = 0, oddAns = 0;
-        for(int i =0;i<temp.size();i++){
-            if(i&1) evenAns = max(evenAns + temp[i], oddAns);
-            else oddAns = max(oddAns + temp[i], evenAns);
+        int rob1 = 0, rob2 = 0;
+        
+        for(int i=0;i<temp.size();i++){
+            int curr = max(rob1 + temp[i], rob2);
+            rob1 = rob2;
+            rob2 = curr;           
         }
-        return max(oddAns,evenAns);
+        
+        return rob2;
     }
 public:
     int rob(vector<int>& nums) {
