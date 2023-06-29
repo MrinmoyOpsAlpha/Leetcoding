@@ -1,32 +1,45 @@
 class Solution {
-    int dfs(vector<int>& stoneValue, int index, vector<int>& dp) {
-        if (index >= stoneValue.size()) return 0;
+public:
+    
+    int dp[50001][2][2];
+    
+    int playGame(vector<int>& stones, bool alice, bool bob, int i) {
         
-        if (dp[index] != INT_MIN) return dp[index];
+        if (i >= stones.size()) return 0;
         
+        int ans;
         int sum = 0;
-        int ans = INT_MIN;
         
-        for (int i = index; i < index + 3 && i < stoneValue.size(); i++) {
-            sum += stoneValue[i];
-            ans = max(ans, sum - dfs(stoneValue, i + 1, dp));
+        if (dp[i][alice][bob] != -1) return dp[i][alice][bob];
+        
+        if (alice) {
+            ans = INT_MIN;
+            for (int idx=i; idx < i + 3 && idx < stones.size(); idx++) {
+                sum += stones[idx];
+                ans = max(ans, sum + playGame(stones, false, true, idx + 1));
+            }
         }
         
-        return dp[index] = ans;
+        if (bob) {
+            ans = INT_MAX;
+            for (int idx=i; idx < i + 3 && idx < stones.size(); idx++) {
+                sum += stones[idx];
+                ans = min(ans, playGame(stones, true, false, idx + 1));
+            }
+        }
+        
+        return dp[i][alice][bob] = ans;
     }
     
-public:
     string stoneGameIII(vector<int>& stoneValue) {
-        int n = stoneValue.size();
-        vector<int> dp(n, INT_MIN);
-        
-        int aliceScore = dfs(stoneValue, 0, dp);
-        
-        if (aliceScore > 0)
-            return "Alice";
-        else if (aliceScore < 0)
+        memset(dp, -1, sizeof dp);
+        int totalScore = 0;
+        for (auto i : stoneValue) totalScore += i;
+        int aliceScore = playGame(stoneValue, true, false, 0);
+        if (totalScore - aliceScore > aliceScore)
             return "Bob";
-        else
-            return "Tie";
+        else if (totalScore - aliceScore < aliceScore)
+            return "Alice";
+        else return "Tie";
     }
 };
