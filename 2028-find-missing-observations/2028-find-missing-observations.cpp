@@ -7,7 +7,7 @@ public:
         if(total > 6*n || total < n) return {};
         
         vector<int> res;
-        while(total){
+        while(n){
             int dice = min(total - n + 1 , 6);
             res.push_back(dice);
             total -= dice;
