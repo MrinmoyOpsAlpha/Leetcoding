@@ -19,7 +19,7 @@ public:
         auto curr= dummy, prev = dummy , nex = dummy;
         int cnt = 0;
         
-        while(curr->next){
+        while(curr && curr->next){
             curr = curr->next;
             cnt++;
         }
