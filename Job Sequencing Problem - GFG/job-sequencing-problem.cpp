@@ -25,7 +25,7 @@ struct Job
 
 class Solution 
 {   
-    static bool comparison(struct Job a ,Job b){
+    static bool comparison(struct Job a ,struct Job b){
         return (a.profit > b.profit);
     }
     public:
