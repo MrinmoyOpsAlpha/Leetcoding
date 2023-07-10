@@ -1,8 +1,8 @@
 class Solution {
 private:
     int count;
-    vector<int> topoSort(int V,vector<int> adj[]){
-        vector<int> ans, indegree(V,0);
+    vector<int> topoSort(int V, vector<int> adj[]){
+        vector<int> ans(V), indegree(V,0);
         queue<int> q;
         
         for(int i=0;i<V;i++){
@@ -12,7 +12,7 @@ private:
         }
         
         for(int i=0;i<V;i++){
-            if(indegree[i] == 0){
+            if(indegree[i]==0){
                 q.push(i);
                 count--;
             }
@@ -22,7 +22,6 @@ private:
             auto node = q.front();
             q.pop();
             ans.push_back(node);
-            
             for(auto it:adj[node]){
                 indegree[it]--;
                 if(indegree[it]==0){
@@ -31,14 +30,14 @@ private:
                 }
             }
         }
+        
         return ans;
     }
-    
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> adj[numCourses];
         for(auto curr:prerequisites){
-            adj[curr[0]].push_back(curr[1]);
+            adj[curr[1]].push_back(curr[0]);
         }
         
         count = numCourses;
