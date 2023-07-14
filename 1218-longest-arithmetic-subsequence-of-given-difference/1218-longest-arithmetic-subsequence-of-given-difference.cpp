@@ -22,18 +22,21 @@ class Solution {
     
     //using dp
     int longestSubsequenceDP(vector<int>& arr, int difference) {
-        unordered_map<int, int> dp;
+        unordered_map<int,int> dp;
+        
         int maxLength = 1;
-        for (int i = 0; i < arr.size(); i++) {
+        for(int i=0;i<arr.size();i++){
             int curr = arr[i];
-            if (dp.find(curr - difference) != dp.end()) {
+            if(dp.find(curr - difference) != dp.end()){
                 dp[curr] = dp[curr - difference] + 1;
             }
-            else {
+            else{
                 dp[curr] = 1;
             }
+            
             maxLength = max(maxLength, dp[curr]);
         }
+        
         return maxLength;
     }
     
