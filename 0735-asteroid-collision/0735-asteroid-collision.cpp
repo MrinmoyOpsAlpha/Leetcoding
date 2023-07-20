@@ -5,20 +5,24 @@ public:
         int n = asteroids.size();
         for(int i=0;i<n;i++){
             while(!st.empty() && asteroids[i] < 0 && st.top() > 0){
-                int diff = asteroids[i] + st.top();
+                int diff = st.top() + asteroids[i];
                 if(diff < 0) st.pop();
                 else if(diff > 0) asteroids[i] = 0;
-                else asteroids[i]=0 , st.pop();
+                else {
+                    asteroids[i] = 0;
+                    st.pop();
+                }
             }
-            
-            if(asteroids[i]) st.push(asteroids[i]);
+            if(asteroids[i])
+                st.push(asteroids[i]);
         }
         
         vector<int> ans(st.size());
-        for(int i = st.size()-1;i>=0;i--){
+        for(int i = st.size() - 1;i>=0;i--){
             ans[i] = st.top();
             st.pop();
         }
+        
         return ans;
     }
 };
