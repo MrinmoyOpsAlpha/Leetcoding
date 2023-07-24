@@ -7,23 +7,22 @@ class Solution {
     }
 public:
     vector<string> topKFrequent(vector<string>& words, int k) {
-        unordered_map<string,int> mp;
-        
+        unordered_map<string,int> freq;
         for(auto w:words){
-            mp[w]++;
+            freq[w]++;
         }
         
         vector<pair<string,int>> v;
-        for(auto it:mp){
+        for(auto it:freq){
             v.push_back({it.first,it.second});
         }
         
         sort(v.begin(),v.end(),comparator);
         
-        vector<string> ans;
+        vector<string> res;
         for(int i=0;i<k;i++){
-            ans.push_back(v[i].first);
+            res.push_back(v[i].first);
         }
-        return ans;
+        return res;
     }
 };
