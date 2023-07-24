@@ -1,5 +1,4 @@
 class Solution {
-public:
     void dfs(vector<string>& res,string& IP,string s,int start,int part){
         if(s.size()==start && part==4){
             res.push_back(IP);
@@ -28,6 +27,7 @@ public:
         else if(tempIP >=0 && tempIP <= 255) return true;
         return false;
     }
+public:
     vector<string> restoreIpAddresses(string s) {
         vector<string> res;
         string IP;
