@@ -1,13 +1,18 @@
 class Solution {
 public:
     int peakIndexInMountainArray(vector<int>& arr) {
+        int left = 0 , right = arr.size()-1;
         
-        for(int i=1;i<arr.size()-1;i++){
-            if(arr[i-1] < arr[i] && arr[i] > arr[i+1]){
-                return i;
+        while(left < right){
+            int mid = (left + right) >> 1;
+            if(arr[mid] < arr[mid + 1]){
+                left = mid + 1;
+            }
+            else{
+                right = mid;
             }
         }
         
-        return -1;
+        return left;
     }
 };
