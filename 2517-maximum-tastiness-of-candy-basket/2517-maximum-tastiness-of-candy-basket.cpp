@@ -1,6 +1,5 @@
 class Solution {
-public:
-    
+public:    
     bool canPlaceCandy(vector<int>& price,int n, int k, int dist){
         int count = 1;
         int co_ord = price[0];
@@ -25,7 +24,7 @@ public:
         while(low<=high){
             int mid = (low + high) >> 1;
             if(canPlaceCandy(price,n,k,mid)){
-                ans = mid;
+                ans = max(mid,ans);
                 low = mid + 1;
             }
             else
