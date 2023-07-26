@@ -38,8 +38,8 @@ public:
     
     int longestCommonSubsequence(string text1, string text2) {
         
-        // memset(dp,-1,sizeof(dp));
-        // return maxLen(text1,text2,text1.size(),text2.size());
-        return lcs(text1,text2,text1.size(),text2.size());
+         memset(dp,-1,sizeof(dp));
+        return maxLen(text1,text2,text1.size(),text2.size());
+        // return lcs(text1,text2,text1.size(),text2.size());
     }
 };
