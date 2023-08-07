@@ -28,7 +28,7 @@ public:
     double findMedian() {
         if(small.size() > large.size()) return small.top();
         else if(small.size() < large.size()) return large.top();
-        else return (small.top() + large.top())/2.0;
+        else return (small.top() + large.top()) / 2.0 ;
     }
 };
 
