@@ -1,6 +1,6 @@
 class MedianFinder {
     priority_queue<long> small;
-    priority_queue<long,vector<long>,greater<long>>large;
+    priority_queue<long,vector<long>,greater<long>> large;
 public:
     MedianFinder() {
         
