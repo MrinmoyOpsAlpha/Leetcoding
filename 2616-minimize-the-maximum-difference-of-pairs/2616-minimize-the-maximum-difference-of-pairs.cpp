@@ -1,14 +1,14 @@
 class Solution {
 private:
     bool canPlace(vector<int>& nums,int mid, int p){
-        int cnt = 0, in = 0;
+        int cnt = 0, prev_take = 0;
         for(int i=1;i<nums.size();i++){
-            if(in){
-                in = 0;
+            if(prev_take){
+                prev_take = 0;
                 continue;
             }
             if(nums[i] - nums[i-1] <= mid){
-                in = 1;
+                prev_take = 1;
                 cnt++;
             }
         }
