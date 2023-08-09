@@ -1,14 +1,15 @@
 class Solution {
 private:
     bool canPlace(vector<int>& nums,int mid, int p){
-        int cnt = 0;
-        for(int i=0;i<nums.size()-1 && cnt < p;){
-            if(nums[i+1] - nums[i] <= mid){
-                cnt++;
-                i=i+2;
+        int cnt = 0, in = 0;
+        for(int i=1;i<nums.size();i++){
+            if(in){
+                in = 0;
+                continue;
             }
-            else{
-                i++;
+            if(nums[i] - nums[i-1] <= mid){
+                in = 1;
+                cnt++;
             }
         }
         return cnt >= p;
@@ -19,17 +20,18 @@ public:
         sort(nums.begin(),nums.end());
         
         int low = 0, high = nums[n-1] - nums[0];
-        
-        while(low < high){
+        int ans = 0;
+        while(low <= high){
             int mid = (low + high) >> 1;
             if(canPlace(nums,mid,p)){
-                high = mid;
+                ans = mid;
+                high = mid - 1;
             }
             else{
                 low = mid + 1;
             }
         }
         
-        return low;
+        return ans;
     }
 };
