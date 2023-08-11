@@ -1,4 +1,25 @@
 class Solution {
+    int subsetHelper(vector<int>& coins, int n, int w, int** dp) {
+        if (w == 0) {
+            return 1; 
+        }
+        if (n == 0) {
+            return 0; 
+        }
+
+        if (dp[n][w] != -1) {
+            return dp[n][w];
+        }
+
+        int waysWithoutCurrentCoin = subsetHelper(coins, n - 1, w, dp); 
+        int waysWithCurrentCoin = 0;
+        if (coins[n - 1] <= w) {
+            waysWithCurrentCoin = subsetHelper(coins, n, w - coins[n - 1], dp); 
+        }
+        
+        dp[n][w] = waysWithoutCurrentCoin + waysWithCurrentCoin;
+        return dp[n][w];
+    }
     int subset(vector<int>& coins, int n, int w){
         int dp[n+1][w+1];
         for(int i=0;i<n+1;i++)
