@@ -1,30 +1,23 @@
-class Solution {    
-int tabulation(vector<vector<int>>& obstacleGrid, int m, int n) {
-    int dp[m][n];
-    
-    for (int i = 0; i < m; i++) {
-        for (int j = 0; j < n; j++) {
-            if (obstacleGrid[i][j] == 1) {
-                dp[i][j] = 0; // Set obstacle positions to 0
-            } else {
-                if (i == 0 && j == 0) {
-                    dp[i][j] = 1; // Initialize the starting position to 1
-                } else if (i == 0) {
-                    dp[i][j] = dp[i][j - 1]; // Fill the first row
-                } else if (j == 0) {
-                    dp[i][j] = dp[i - 1][j]; // Fill the first column
-                } else {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - 1]; // Fill other positions
-                }
-            }
+class Solution {
+    int dp[101][101];
+    int dfs(vector<vector<int>>& obstacleGrid, int i, int j) {
+        if (i >= obstacleGrid.size() || j >= obstacleGrid[0].size() || obstacleGrid[i][j] == 1) {
+            return 0;
         }
+        
+        if (i == obstacleGrid.size() - 1 && j == obstacleGrid[0].size() - 1) {
+            return 1;
+        }
+        
+        if (dp[i][j] != -1) {
+            return dp[i][j];
+        }
+        
+        return dp[i][j] = dfs(obstacleGrid, i + 1, j) + dfs(obstacleGrid, i, j + 1);
     }
-    
-    return dp[m - 1][n - 1];
-}
-
 public:
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        return tabulation(obstacleGrid,obstacleGrid.size(),obstacleGrid[0].size());
+        memset(dp, -1, sizeof(dp));
+        return dfs(obstacleGrid, 0, 0);
     }
 };
