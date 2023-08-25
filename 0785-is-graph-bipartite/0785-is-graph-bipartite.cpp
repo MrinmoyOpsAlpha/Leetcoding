@@ -1,6 +1,6 @@
 class Solution {
 private:
-    bool check(int start,int V,vector<int> adj[], vector<int>& color){
+    bool check(vector<int> adj[],int start,int n,vector<int>& color){
         queue<int> q;
         q.push(start);
         color[start] = 0;
@@ -23,20 +23,20 @@ private:
     }
 public:
     bool isBipartite(vector<vector<int>>& graph) {
-        int V = graph.size();
-        vector<int> adj[V];
-        vector<int> color(V,-1);
+        int n = graph.size();
+        vector<int> adj[n];
+        vector<int> color(n,-1);
         
-        for(int i=0;i<V;i++){
+        for(int i=0;i<n;i++){
             for(int j=0;j<graph[i].size();j++){
                 adj[i].push_back(graph[i][j]);
                 adj[graph[i][j]].push_back(i);
             }
         }
         
-        for(int i=0;i<V;i++){
+        for(int i=0;i<n;i++){
             if(color[i] == -1){
-                if(check(i,V,adj,color) == false)
+                if(check(adj,i,n,color) == false)
                     return false;
             }
         }
