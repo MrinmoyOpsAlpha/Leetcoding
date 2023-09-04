@@ -1,27 +1,19 @@
 class Solution {
-    int LIS(vector<int>& arr){
-        int n = arr.size();
-        vector<int> temp;
-        temp.push_back(arr[0]);
-
-        int len = 1;
-
-        for(int i=1; i<n; i++){
-            if(arr[i]>temp.back()){
-               temp.push_back(arr[i]);
-               len++;
-            } 
-            else{
-                int ind = lower_bound(temp.begin(),temp.end(),arr[i]) - temp.begin();
-                temp[ind] = arr[i];
-            }
-        }
-
-        return len;
-    }
 public:
     bool increasingTriplet(vector<int>& nums) {
-        int cnt = LIS(nums);
-        return cnt >= 3;
+        int first = INT_MAX;
+        int second = INT_MAX;
+        
+        for (int n : nums) {
+            if (n <= first) {
+                first = n;
+            } else if (n <= second) {
+                second = n;
+            } else {
+                return true;
+            }
+        }
+        
+        return false;
     }
 };
