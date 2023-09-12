@@ -2,21 +2,18 @@ class Solution {
 public:
     long long beautifulSubarrays(vector<int>& nums) {
         int n = nums.size();
-        vector<int> prefixXor(n+1,0);
         
-        for(int i=0;i<n;i++){
-            prefixXor[i+1] = prefixXor[i] ^ nums[i];
-        }
-        
-        unordered_map<int,int> mp;
+        long long cnt = 0, xr = 0;
+        map<long long, long long> mp;
         mp[0] = 1;
         
-        long long ans = 0;
-        for(int i=1;i<=n;i++){
-            if(mp.find(prefixXor[i]) != mp.end()) ans += mp[prefixXor[i]];
-            mp[prefixXor[i]]++;
+        for(int i=0;i<nums.size();i++){
+            xr = xr ^ nums[i];
+            
+            if(mp.find(xr) != mp.end()) cnt += mp[xr];
+            
+            mp[xr]++;
         }
-        
-        return ans;
+        return cnt;
     }
 };
