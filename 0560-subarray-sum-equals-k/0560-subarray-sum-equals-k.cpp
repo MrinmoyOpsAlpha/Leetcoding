@@ -1,14 +1,18 @@
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
-        int totalSum = 0, cnt = 0 ;
         map<int,int> mp;
         mp[0] = 1;
         
+        int totalSum = 0;
+        int cnt = 0;
         for(int i=0;i<nums.size();i++){
             totalSum += nums[i];
-            int toFind = totalSum - k;
-            if(mp.find(toFind) != mp.end()) cnt = cnt + mp[toFind];
+            
+            int findNum = totalSum - k;
+            
+            if(mp.find(findNum) != mp.end()) cnt += mp[findNum];
+            
             mp[totalSum]++;
         }
         
