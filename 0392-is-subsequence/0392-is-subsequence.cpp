@@ -1,20 +1,26 @@
 class Solution {
-public:
-    int lcs(string x, string y,int m , int n){
-        int t[m+1][n+1];        
-        for(int i=0;i<m+1;i++)
-            for(int j=0;j<n+1;j++)
-                if(i==0 || j==0) t[i][j]=0;
+private:
+    int dp[101][10001];
+    int lcs(string s,string t,int x,int y){
+        if(x==0 || y==0) return 0;
         
-        for(int i=1;i<m+1;i++)
-            for(int j=1;j<n+1;j++){
-                if(x[i-1] == y[j-1]) t[i][j] = 1 + t[i-1][j-1];
-                else t[i][j] = max(t[i-1][j],t[i][j-1]);
-            }
-        return t[m][n];
+        if(dp[x][y] != -1) return dp[x][y];
+        
+        int take = 0 , nottake = 0;
+        
+        if(s[x-1] == t[y-1]){
+            take = 1 + lcs(s,t,x-1,y-1);
+        }
+        
+        else{
+            nottake = 0 + max(lcs(s,t,x-1,y), lcs(s,t,x,y-1));
+        }
+        
+        return dp[x][y] = max(take,nottake);
     }
+public:
     bool isSubsequence(string s, string t) {
-        int m = s.size(), n = t.size();
-        return lcs(s,t,m,n) == m; 
+         memset(dp,-1,sizeof(dp));
+        return lcs(s,t,s.size(),t.size()) == s.size();
     }
 };
