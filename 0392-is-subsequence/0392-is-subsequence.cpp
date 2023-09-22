@@ -10,13 +10,13 @@ private:
         
         if(s[x-1] == t[y-1]){
             take = 1 + lcs(s,t,x-1,y-1);
+            return dp[x][y] = take;
         }
         
         else{
             nottake = 0 + max(lcs(s,t,x-1,y), lcs(s,t,x,y-1));
+            return dp[x][y] = nottake;
         }
-        
-        return dp[x][y] = max(take,nottake);
     }
 public:
     bool isSubsequence(string s, string t) {
