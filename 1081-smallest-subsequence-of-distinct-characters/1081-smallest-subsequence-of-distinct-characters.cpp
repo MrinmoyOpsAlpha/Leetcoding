@@ -1,15 +1,14 @@
 class Solution {
 public:
     string smallestSubsequence(string s) {
-        vector<int> seen(26,0), freq(26,0);
+        vector<int> seen(26),freq(26);
         stack<char> st;
         
-        for(int i=0;i<s.size();i++){
-            freq[s[i] - 'a']++;
+        for(auto it:s){
+            freq[it - 'a']++;
         }
         
-        for(int i=0;i<s.size();i++){
-            
+        for(int i = 0;i<s.size();i++){
             freq[s[i] - 'a']--;
             
             if(seen[s[i] - 'a']) continue;
@@ -23,13 +22,14 @@ public:
             seen[s[i] - 'a'] = 1;
         }
         
-        string ans ="";
+        
+        string ans = "";
         while(!st.empty()){
-            ans += st.top();
+            ans = ans + st.top();
             st.pop();
         }
         
-        reverse(ans.begin(), ans.end());
+        reverse(ans.begin(),ans.end());
         return ans;
     }
 };
