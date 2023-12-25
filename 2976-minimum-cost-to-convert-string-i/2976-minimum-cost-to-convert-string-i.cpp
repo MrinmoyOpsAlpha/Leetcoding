@@ -1,12 +1,12 @@
 class Solution {
 private:
     void bfs(unordered_map<char,vector<pair<char,int>>> &graph, char source, vector<vector<int>>& distance){
-        queue<pair<int,int>> q;
+        priority_queue<pair<int,int>> q;
         q.push({source,0}); //source, weight
         
         while(!q.empty()){
-            int node = q.front().first;
-            int dist = q.front().second;
+            int node = q.top().first;
+            int dist = q.top().second;
             q.pop();
             
             for(auto it: graph[node]){
