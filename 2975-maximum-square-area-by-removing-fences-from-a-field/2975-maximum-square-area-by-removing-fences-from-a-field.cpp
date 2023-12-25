@@ -6,8 +6,7 @@ public:
         vFences.push_back(1);
         vFences.push_back(n);
         
-        sort(hFences.begin(), hFences.end());
-        sort(vFences.begin(), vFences.end());
+
         
         unordered_set<int> st;
         long long ans = 0;
