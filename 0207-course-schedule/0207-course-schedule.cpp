@@ -1,7 +1,6 @@
 class Solution {
-private:
-    int count;
-    vector<int> topoSort(int V, vector<int> adj[]){
+    int count = 0;
+    vector<int> topoSort(int V,vector<int> adj[]){
         vector<int> ans(V), indegree(V,0);
         queue<int> q;
         
@@ -12,19 +11,20 @@ private:
         }
         
         for(int i=0;i<V;i++){
-            if(indegree[i]==0){
+            if(indegree[i] == 0){
                 q.push(i);
                 count--;
             }
         }
         
         while(!q.empty()){
-            auto node = q.front();
+            int node = q.front();
             q.pop();
             ans.push_back(node);
+            
             for(auto it:adj[node]){
                 indegree[it]--;
-                if(indegree[it]==0){
+                if(indegree[it] == 0){
                     q.push(it);
                     count--;
                 }
@@ -36,12 +36,13 @@ private:
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
         vector<int> adj[numCourses];
-        for(auto curr:prerequisites){
-            adj[curr[1]].push_back(curr[0]);
+        
+        for(auto it: prerequisites){
+            adj[it[0]].push_back(it[1]);
         }
         
         count = numCourses;
-        vector<int> ans = topoSort(numCourses,adj);
+        vector<int> res = topoSort(numCourses,adj);
         return count == 0;
     }
 };
