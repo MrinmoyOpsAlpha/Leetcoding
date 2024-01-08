@@ -16,11 +16,11 @@ private:
         
         if(!root) return ;
         
-        if(root->left){
+        if(root->val > low){
             helper(root->left,low,high);
         }
         
-        if(root->right){
+        if(root->val < high){
             helper(root->right,low,high);
         }
         
